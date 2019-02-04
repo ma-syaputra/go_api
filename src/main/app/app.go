@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis"
+	//"net/http"
 	"strconv"
 )
 
@@ -16,7 +17,7 @@ func GetInstructions(c *gin.Context) {
 }
 
 func GetInstruction(c *gin.Context) {
-	// w.Header().Set("Access-Control-Allow-Origin", "*")
+	//   w.Header().Set("Access-Control-Allow-Origin", "*")
 	client := redis.NewClient(&redis.Options{
 		Addr:     "172.17.6.46:6379",
 		Password: "",
@@ -35,7 +36,13 @@ func GetInstruction(c *gin.Context) {
 		c.JSON(200, gin.H{"message": "Data Empty"})
 	}
 	if len(val) > 0 {
-		c.JSON(200, gin.H{"breaking": val})
+		// c.JSON(200, gin.H{"breaking": val})
+		c.JSON(200, gin.H{"code": 200,
+			"message": val})
+		// c.JSON(http.StatusOK, gin.H{
+		// 	"code":    http.StatusOK,
+		// 	"message": val,
+		// })
 	}
 }
 
